@@ -7,7 +7,6 @@ abstract class OpNode {
 }
 
 case class Operator(oper: String, left: OpNode, right: OpNode) extends OpNode {
-  // println("inside operator")
 
   override def getValue: Int = {
     val lv = left.getValue
@@ -26,8 +25,6 @@ case class Operator(oper: String, left: OpNode, right: OpNode) extends OpNode {
 }
 
 case class Number(num: Int) extends OpNode {
-  // println("inside operand: " + num)
-
   override def getValue: Int = {
     num
   }
