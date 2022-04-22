@@ -2,12 +2,6 @@ import scala.util.parsing.combinator.RegexParsers
 import scala.util.parsing.combinator.PackratParsers
 
 // Entities definition
-object Op extends Enumeration {
-  type Op = Value
-
-  val Add, Sub, Mult, Div, Val = Value
-}
-
 abstract class OpNode {
   def getValue: Int
 }
@@ -44,7 +38,7 @@ object ArithmeticParser extends RegexParsers with PackratParsers {
   lazy val op: PackratParser[String] = "[*+-/]".r ^^ {s => s}
 
   lazy val expr: PackratParser[OpNode] = (
-    "(" ~ expr ~ op ~ expr ~ ")" ^^ {case s ~ a ~ b ~ c ~ t => Operator(b, a, c)} |
+    "(" ~ expr ~ op ~ expr ~ ")" ^^ {case _ ~ a ~ b ~ c ~ _ => Operator(b, a, c)} |
     (expr ~ op ~ expr) ^^ {case a ~ b ~ c => Operator(b, a, c)} |
     number
     )
